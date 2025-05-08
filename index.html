@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hope for Africa</title>
   <style>
     body {
@@ -21,7 +21,7 @@
     }
 
     .hero {
-      background-image: url('https://blog.compassion.com/wp-content/uploads/2015/08/day-of-the-african-child-refugees-adjumani-refugee-settlement.jpg');
+      background-image: url('https://via.placeholder.com/1200x300?text=Hope+for+Africa');
       background-size: cover;
       background-position: center;
       height: 300px;
@@ -44,20 +44,30 @@
       margin-top: 2rem;
     }
 
-    /* Hidden Dot */
     .hidden-dot {
       position: absolute;
-      top: 0%;
+      top: 70%;
       left: 50%;
-      width: 15px;
-      height: 15px;
-      background-color: #7393B3; /* Slightly off from #f5f2eb */
+      width: 10px;
+      height: 10px;
+      background-color: red;
       border-radius: 50%;
-      
+      cursor: pointer;
+    }
+
+    a.dot-link {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      display: block;
+      width: 10px;
+      height: 10px;
+      z-index: 10;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Hope for Africa</h1>
     <p>Empowering communities, changing lives.</p>
@@ -68,7 +78,8 @@
   <div class="content">
     <h2>Our Mission</h2>
     <p>
-      We provide education, clean water, and sustainable development to communities in need across Africa. Join us in making a lasting impact.
+      We provide education, clean water, and sustainable development to communities in need across Africa.
+      Join us in making a lasting impact.
     </p>
 
     <div class="cta">
@@ -76,9 +87,10 @@
     </div>
   </div>
 
-<!-- dot -->
-<a href="Use.html" style="position: absolute; top: 0%; left: 50%;">
-  <div class="hidden-dot"></div>
-</a>
+  <!-- Clickable red dot -->
+  <a href="Use.html" class="dot-link">
+    <div class="hidden-dot"></div>
+  </a>
 
-
+</body>
+</html>
