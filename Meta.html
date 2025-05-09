@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Statistics Calculator</h1>
+        <p>Enter numbers separated by commas:</p>
+        <input type="text" id="numbersInput" placeholder="e.g., 1, 2, 3, 4, 5">
+        <button onclick="calculateStats()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateStats() {
+            const input = document.getElementById('numbersInput').value;
+            const numbers = input.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+            
+            if (numbers.length === 0) {
+                document.getElementById('result').innerHTML = '<p>Please enter valid numbers.</p>';
+                return;
+            }
+
+            const sortedNumbers = [...numbers].sort((a, b) => a - b);
+            const mean = (numbers.reduce((sum, num) => sum + num, 0) / numbers.length).toFixed(2);
+            const median = calculateMedian(sortedNumbers);
+            const range = (Math.max(...numbers) - Math.min(...numbers)).toFixed(2);
+            const min = Math.min(...numbers);
+            const max = Math.max(...numbers);
+            const q1 = calculateMedian(sortedNumbers.slice(0, Math.floor(sortedNumbers.length / 2)));
+            const q3 = calculateMedian(sortedNumbers.slice(Math.ceil(sortedNumbers.length / 2)));
+
+            document.getElementById('result').innerHTML = `
+                <p><strong>Mean:</strong> ${mean}</p>
+                <p><strong>Median:</strong> ${median}</p>
+                <p><strong>Range:</strong> ${range}</p>
+                <p><strong>Min:</strong> ${min}</p>
+                <p><strong>Max:</strong> ${max}</p>
+                <p><strong>Q1 (First Quartile):</strong> ${q1}</p>
+                <p><strong>Q3 (Third Quartile):</strong> ${q3}</p>
+            `;
+        }
+
+        function calculateMedian(numbers) {
+            const mid = Math.floor(numbers.length / 2);
+            return numbers.length % 2 === 0
+                ? ((numbers[mid - 1] + numbers[mid]) / 2).toFixed(2)
+                : numbers[mid].toFixed(2);
+        }
+    </script>
+</body>
+</html>
