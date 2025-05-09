@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEMDAS Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PEMDAS Calculator</h1>
+        <p>Enter a mathematical expression:</p>
+        <input type="text" id="expressionInput" placeholder="e.g., (2 + 3) * 4 - 5^2">
+        <button onclick="calculateExpression()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateExpression() {
+            const input = document.getElementById('expressionInput').value;
+
+            try {
+                // Evaluate the expression
+                const sanitizedInput = input.replace(/[^-()\d/*+.^]/g, ''); // Sanitize input
+                const result = evaluateExpression(sanitizedInput);
+                document.getElementById('result').innerHTML = `<p><strong>Result:</strong> ${result}</p>`;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `<p style="color: red;"><strong>Error:</strong> Invalid expression.</p>`;
+            }
+        }
+
+        function evaluateExpression(expression) {
+            // Replace ^ with ** for exponentiation
+            const formattedExpression = expression.replace(/\^/g, '**');
+            return new Function(`return ${formattedExpression}`)();
+        }
+    </script>
+</body>
+</html>
